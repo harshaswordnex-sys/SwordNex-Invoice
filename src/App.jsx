@@ -1,121 +1,102 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import {
+  ClipboardCheck,
+  Barcode,
+  Users,
+  Percent,
+  BarChart3,
+  Printer,
+  ShoppingBag,
+  CreditCard,
+  ClipboardList,
+  Settings,
+  LogOut,
+  Menu,
+  Bell
+} from 'lucide-react';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const menuItems = [
+    { name: 'Inventory', icon: <ClipboardCheck size={20} /> },
+    { name: 'Barcodes', icon: <Barcode size={20} />, active: true },
+    { name: 'POS Billing', icon: <Users size={20} /> },
+    { name: 'Record', icon: <Percent size={20} /> },
+    { name: 'Reports', icon: <BarChart3 size={20} /> },
+    { name: 'GST Bill', icon: <Printer size={20} /> },
+    { name: 'Cash Book', icon: <ShoppingBag size={20} /> },
+    { name: 'Credit', icon: <CreditCard size={20} /> },
+    { name: 'Subuser Records', icon: <ClipboardList size={20} /> },
+  ];
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="layout">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="logo-container">
+          <div className="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="4" fill="#10b981" />
+              <path d="M7 6H17V18H7V6Z" fill="white" />
+              <path d="M9 10H15" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+              <path d="M9 14H13" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </div>
+          <div className="logo-text">
+            <span className="logo-title">Swordnex</span>
+            <span className="logo-subtitle">Billing</span>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+
+        <nav className="menu">
+          {menuItems.map((item, index) => (
+            <div key={index} className={`menu-item ${item.active ? 'active' : ''}`}>
+              <span className="menu-icon">{item.icon}</span>
+              <span className="menu-name">{item.name}</span>
+            </div>
+          ))}
+        </nav>
+
+        <div className="bottom-menu">
+          <div className="menu-item">
+            <span className="menu-icon"><Settings size={20} /></span>
+            <span className="menu-name">Settings</span>
+          </div>
+          <div className="menu-item logout">
+            <span className="menu-icon"><LogOut size={20} /></span>
+            <span className="menu-name">Log out</span>
+          </div>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </aside>
 
-      <div className="ticks"></div>
+      {/* Main Content Area */}
+      <main className="main-content">
+        {/* Top Bar */}
+        <header className="topbar">
+          <div className="topbar-left">
+            <button className="icon-btn">
+              <Menu size={24} />
+            </button>
+          </div>
+          <div className="topbar-right">
+            <button className="icon-btn notification-btn">
+              <Bell size={20} />
+              <span className="notification-dot"></span>
+            </button>
+            <div className="user-profile">
+              <div className="avatar">M</div>
+              <span className="user-name">Magic</span>
+            </div>
+          </div>
+        </header>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        {/* Dashboard content placeholder */}
+        <div className="content-area">
+          {/* Main area is left empty as requested */}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </main>
+    </div>
+  );
+};
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
-}
-
-export default App
+export default App;

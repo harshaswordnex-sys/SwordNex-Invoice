@@ -117,8 +117,8 @@ const NAV_ITEMS = [
     { id: "subuser", label: "Subuser Records", Icon: SubuserIcon },
 ];
 
-export default function SwordnexLayout() {
-    const [active, setActive] = useState("generate");
+export default function DashboardLayout() {
+    const [active, setActive] = useState("dashboard");
     const [collapsed, setCollapsed] = useState(false);
 
 

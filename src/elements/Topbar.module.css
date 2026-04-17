@@ -1,0 +1,63 @@
+.topbar {
+    height: var(--bh);
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Toggle */
+.tTog {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.tTog:hover {
+    background: var(--hover-bg);
+}
+
+.sp {
+    flex: 1;
+}
+
+/* Right */
+.tActs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nBtn {
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.nBtn:hover {
+    background: var(--hover-bg);
+}
+
+.av {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #34d471, #15a34a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.avN {
+    font-size: 13px;
+    font-weight: 600;
+}

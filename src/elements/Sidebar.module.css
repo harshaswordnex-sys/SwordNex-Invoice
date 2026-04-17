@@ -1,0 +1,128 @@
+.sidebar {
+    width: var(--sw);
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    transition: width .26s cubic-bezier(.4, 0, .2, 1);
+    overflow: hidden;
+}
+
+.sidebarCollapsed {
+    width: 60px;
+}
+
+/* ===== LOGO ===== */
+
+.sLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 13px;
+    height: var(--bh);
+    border-bottom: 1px solid var(--border);
+}
+
+.sMark {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(145deg, #34d471, #15a34a);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sCopy {
+    white-space: nowrap;
+    transition: .2s;
+}
+
+.sidebarCollapsed .sCopy {
+    opacity: 0;
+    width: 0;
+}
+
+/* ===== NAV ===== */
+
+.sNav {
+    flex: 1;
+    padding: 8px;
+    overflow-y: auto;
+}
+
+/* 🔥 FIXED BUTTON + LINK STYLE */
+.nb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: var(--r);
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: .15s;
+
+    /* ✅ FIXES LOGOUT BUTTON */
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.nb:hover {
+    background: var(--hover-bg);
+    color: var(--text-hi);
+}
+
+/* ACTIVE ITEM */
+.on {
+    background: var(--active-bg);
+    color: var(--green-dark);
+    border-left: 4px solid var(--green);
+}
+
+/* ICON */
+.ni {
+    width: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+/* LABEL */
+.nl {
+    transition: .2s;
+}
+
+.sidebarCollapsed .nl {
+    opacity: 0;
+    width: 0;
+}
+
+/* ===== REMOVE BLACK FOCUS BOX ===== */
+
+.nb:focus {
+    outline: none;
+}
+
+.nb:focus-visible {
+    outline: none;
+}
+
+/* OPTIONAL NICE FOCUS (instead of black box) */
+/*
+.nb:focus-visible {
+    box-shadow: 0 0 0 2px rgba(30, 94, 255, 0.3);
+}
+*/
+
+/* ===== FOOTER ===== */
+
+.sFoot {
+    padding: 8px;
+    border-top: 1px solid var(--border);
+}

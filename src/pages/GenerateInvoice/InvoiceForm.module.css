@@ -1,12 +1,8 @@
 .container {
-  padding: 30px 80px;
-  background: #f4f6fb;
-  min-height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
 /* Header */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -33,6 +29,7 @@
   color: #555;
 }
 
+/* Buttons */
 .actions {
   display: flex;
   justify-content: end;
@@ -46,11 +43,6 @@
   background: #e9edf3;
   cursor: pointer;
   font-weight: 500;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  background: #dfe3ea;
 }
 
 .primary {
@@ -59,23 +51,19 @@
 }
 
 /* Card */
-
 .card {
   background: white;
   padding: 25px;
   border-radius: 16px;
   margin-bottom: 25px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .card h3 {
   margin-bottom: 18px;
-  display: flex;
-  justify-content: start;
 }
 
 /* Form */
-
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -84,29 +72,18 @@
 
 .formGroup label {
   font-size: 14px;
-  display: flex;
-  justify-content: start;
-  margin-left: 4px;
   margin-bottom: 6px;
 }
 
 .formGroup input,
 .formGroup select {
-  padding: 12px 14px;
+  padding: 12px;
   border-radius: 10px;
   border: 1px solid #dcdfe6;
-  font-size: 14px;
   background: #fafbfc;
 }
 
-.formGroup input:focus,
-.formGroup select:focus {
-  outline: none;
-  border-color: #1e5eff;
-}
-
-/* Layout Grids */
-
+/* Grids */
 .grid4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -136,20 +113,4 @@
   align-items: center;
   gap: 10px;
   margin-top: 28px;
-}
-
-/* Responsive */
-
-@media (max-width: 1024px) {
-  .grid4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid3 {
-    grid-template-columns: 1fr;
-  }
-
-  .twoColumn {
-    grid-template-columns: 1fr;
-  }
 }

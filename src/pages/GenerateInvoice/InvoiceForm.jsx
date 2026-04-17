@@ -1,7 +1,6 @@
-import React from "react";
-import styles from "./InvoiceGenerator.module.css";
+import styles from "./InvoiceForm.module.css";
 
-export default function InvoiceGenerator() {
+export default function InvoiceForm() {
   return (
     <div className={styles.container}>
 
@@ -11,9 +10,7 @@ export default function InvoiceGenerator() {
           <h1>New Invoice</h1>
           <span className={styles.status}>pending</span>
         </div>
-
-        </div>
-        
+      </div>
 
       {/* Invoice Details */}
       <div className={styles.card}>
@@ -146,9 +143,12 @@ export default function InvoiceGenerator() {
 
       </div>
 
-        <div className={styles.actions}>
-          <button className={`${styles.btn} ${styles.primary}`}>Save & Issue</button>
-        </div>
+      {/* Actions */}
+      <div className={styles.actions}>
+        <button className={`${styles.btn} ${styles.primary}`}>
+          Save & Issue
+        </button>
+      </div>
 
     </div>
   );

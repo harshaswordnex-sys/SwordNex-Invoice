@@ -66,74 +66,11 @@ export default function OrganizationSetup() {
             </div>
           </div>
 
-          {/* Bank Details */}
-          <div className={styles.card}>
-            <h3>Bank Details</h3>
-
-            <div className={styles.grid2}>
-              <div className={styles.formGroup}>
-                <label>Account Holder Name</label>
-                <input type="text" />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Bank Name</label>
-                <input type="text" />
-              </div>
-            </div>
-
-            <div className={styles.grid3}>
-              <div className={styles.formGroup}>
-                <label>Account Number</label>
-                <input type="text" />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>IFSC Code</label>
-                <input type="text" />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Branch</label>
-                <input type="text" />
-              </div>
-            </div>
-          </div>
-
-          {/* Invoice Settings */}
-          <div className={styles.card}>
-            <h3>Invoice Settings</h3>
-
-            <div className={styles.grid3}>
-              <div className={styles.formGroup}>
-                <label>Default Currency</label>
-                <select>
-                  <option>₹ INR</option>
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Invoice Prefix</label>
-                <input type="text" placeholder="INV" />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Payment Terms</label>
-                <input type="text" placeholder="e.g. Due in 7 days" />
-              </div>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Upload Signature</label>
-              <input type="file" />
-            </div>
-          </div>
-
           {/* Actions */}
           <div className={styles.actions}>
             <button className={styles.btn}>Cancel</button>
             <button className={`${styles.btn} ${styles.primary}`}>
-              <Link to="/dashboard">Save Organization</Link>
+              <Link to="/dashboard" style={{textDecoration: "none", color: "#fff"}}>Save Organization</Link>
             </button>
           </div>
 

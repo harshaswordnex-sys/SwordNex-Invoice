@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   min-height: 90vh;
   font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
 }
 
 .left {
@@ -109,6 +110,10 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+.signInBtn {
+  text-decoration: none;
+} 
 
 .divider {
   display: flex;

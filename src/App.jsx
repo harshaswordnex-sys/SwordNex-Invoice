@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+
 /* Pages */
 import Dashboard from "./pages/Dashboard/Dashboard";
 import InvoiceGenerator from "./pages/GenerateInvoice/InvoiceGenerator";
@@ -11,30 +14,101 @@ import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import OrganizationSetup from "./pages/OrganizationSetup/OrganizationSetup";
 import Register from "./pages/Register/Register";
+import SuperAdminLogin from "./pages/SuperAdminLogin/SuperAdminLogin";
+import SuperAdminPanel from "./pages/SuperAdminPanel/SuperAdminPanel";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* ✅ DEFAULT (FIXED) */}
+        {/* Default */}
         <Route index element={<Navigate to="/login" />} />
 
-        {/* Pages */}
-        <Route path="/register" element={<Register />} />
+        {/* Public */}
         <Route path="/login" element={<Login />} />
-        <Route path="/organization-setup" element={<OrganizationSetup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/generate-invoice" element={<InvoiceGenerator />} />
-        <Route path="/invoice-history" element={<InvoiceHistory />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/subuser-records" element={<SubuserRecords />} />
+        <Route path="/superadmin/login" element={<SuperAdminLogin />} />
+        <Route path="/register" element={<Register />} />
 
-        {/* ✅ fallback */}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        {/* 🔐 Super Admin Protected */}
+        <Route
+          path="/superadmin/panel"
+          element={
+            <ProtectedRoute roleRequired="superadmin">
+              <SuperAdminPanel />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🔐 Admin Protected */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/generate-invoice"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <InvoiceGenerator />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/invoice-history"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <InvoiceHistory />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/subuser-records"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <SubuserRecords />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/organization-setup"
+          element={
+            <ProtectedRoute roleRequired="admin">
+              <OrganizationSetup />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* fallback */}
+        <Route path="*" element={<Navigate to="/login" />} />
 
       </Routes>
+
       <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
   );

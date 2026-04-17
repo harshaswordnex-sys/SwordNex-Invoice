@@ -1,21 +1,9 @@
-import { useState } from "react";
-import Sidebar from "../../elements/Sidebar";
-import Topbar from "../../elements/Topbar";
-import styles from "./OrganizationSetup.module.css";
 import { Link } from "react-router-dom";
+import styles from "./OrganizationSetup.module.css";
 
 export default function OrganizationSetup() {
-  const [collapsed, setCollapsed] = useState(false);
-
   return (
-    <div className={styles.layout}>
-
-      <Sidebar collapsed={collapsed} />
-
-      <div className={styles.main}>
-        <Topbar onToggle={() => setCollapsed(c => !c)} />
-
-        <main className={styles.content}>
+    <main className={styles.content}>
 
           {/* Header */}
           <div className={styles.header}>
@@ -145,12 +133,10 @@ export default function OrganizationSetup() {
           <div className={styles.actions}>
             <button className={styles.btn}>Cancel</button>
             <button className={`${styles.btn} ${styles.primary}`}>
-              <Link to="/dashboard" >Save Organization</Link>
+              <Link to="/dashboard">Save Organization</Link>
             </button>
           </div>
 
-        </main>
-      </div>
-    </div>
+    </main>
   );
 }

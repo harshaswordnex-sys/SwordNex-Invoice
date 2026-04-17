@@ -9,6 +9,7 @@ import SubuserRecords from "./pages/SubuserRecords/SubuserRecords";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
 import OrganizationSetup from "./pages/OrganizationSetup/OrganizationSetup";
+import Register from "./pages/Register/Register";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route index element={<Navigate to="/login" />} />
 
         {/* Pages */}
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/organization-setup" element={<OrganizationSetup />} />
         <Route path="/dashboard" element={<Dashboard />} />

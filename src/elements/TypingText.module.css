@@ -1,0 +1,17 @@
+.tagline {
+  font-weight: bold;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+/* Blinking cursor */
+.cursor {
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

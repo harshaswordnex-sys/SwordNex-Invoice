@@ -1,13 +1,14 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 90vh;
+  min-height: 60vh;
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
+  background-color:#166534;
 }
 
 .left {
-  padding: 60px 80px;
+  padding: 30px 80px;
   background: #ffffff;
   text-align: center;
 }
@@ -191,5 +192,56 @@
 
   .left {
     padding: 40px 24px;
+  }
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.signInBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tagline {
+  color: #166534;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 14px;
+
+  display: inline-block;
+  overflow: hidden;
+  border-right: 3px solid #166534;
+
+  max-width: 100%;
+  white-space: normal;   /* allow wrapping */
+
+  animation: typing 3s steps(40, end) forwards, blink 0.7s infinite;
+}
+@keyframes typing {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
   }
 }

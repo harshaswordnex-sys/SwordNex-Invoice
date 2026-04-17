@@ -1,0 +1,56 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* RIGHT SIDE */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ✅ NORMAL FLOW (NO CENTERING) */
+.content {
+  flex: 1;
+  padding: 30px;
+  background: #f4f6fb;
+  overflow-y: auto;
+}
+
+/* Header */
+.header {
+  margin-bottom: 20px;
+}
+
+/* ✅ FULL WIDTH TABLE */
+.tableWrapper {
+  width: 100%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+/* Button */
+.downloadBtn {
+  padding: 6px 12px;
+  background: #1e5eff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

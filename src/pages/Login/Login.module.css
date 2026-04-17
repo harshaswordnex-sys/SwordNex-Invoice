@@ -111,6 +111,10 @@
   font-weight: bold;
 }
 
+.signInBtn {
+  text-decoration: none;
+} 
+
 .divider {
   display: flex;
   align-items: center;

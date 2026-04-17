@@ -70,7 +70,7 @@ export default function OrganizationSetup() {
           <div className={styles.actions}>
             <button className={styles.btn}>Cancel</button>
             <button className={`${styles.btn} ${styles.primary}`}>
-              <Link to="/dashboard">Save Organization</Link>
+              <Link to="/dashboard" style={{textDecoration: "none", color: "#fff"}}>Save Organization</Link>
             </button>
           </div>
 

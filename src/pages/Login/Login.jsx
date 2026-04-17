@@ -66,7 +66,7 @@ const Login = () => {
           />
 
           <button type="submit" className={styles.signInBtn}>
-            <Link to="/organization-setup">Sign-in</Link>
+            <Link to="/organization-setup" style={{textDecoration: "none", color: "#fff"}}>Sign-in</Link>
           </button>
         </form>
         </div>

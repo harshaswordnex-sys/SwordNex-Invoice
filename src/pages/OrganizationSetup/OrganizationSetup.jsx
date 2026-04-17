@@ -23,10 +23,10 @@ export default function OrganizationSetup() {
                 <input type="text" placeholder="Enter business name" />
               </div>
 
-              <div className={styles.formGroup}>
+              {/* <div className={styles.formGroup}>
                 <label>Upload Logo</label>
                 <input type="file" />
-              </div>
+              </div> */}
             </div>
 
             <div className={styles.grid3}>

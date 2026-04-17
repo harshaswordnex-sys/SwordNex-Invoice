@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /* Pages */
 import Dashboard from "./pages/Dashboard/Dashboard";
 import InvoiceGenerator from "./pages/GenerateInvoice/InvoiceGenerator";
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/dashboard" />} />
 
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </BrowserRouter>
   );
 }

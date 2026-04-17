@@ -70,6 +70,7 @@
   font-size: 14px;
   outline: none;
   transition: 0.2s;
+  width: 100%;
 }
 
 .input:focus {

@@ -2,144 +2,317 @@ import { useState } from "react";
 import styles from "./Register.module.css";
 import Loader from "../../elements/Loader";
 import TypingText from "../../elements/TypingText";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const MultiStepForm = () => {
-  const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
+const RegisterForm = () => {
+    const [errors, setErrors] = useState({});
+    const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-  const totalSteps = 3;
+    const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    companyName: "",
-    ownedBy: "",
-    address: "",
-    gstin: "",
-    pan: "",
-    phone: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+    const totalSteps = 3;
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const [formData, setFormData] = useState({
+        companyName: "",
+        ownedBy: "",
+        address: "",
+        gstin: "",
+        pan: "",
+        hsn: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
 
-  const next = () => setStep((prev) => Math.min(prev + 1, totalSteps));
-  const prev = () => setStep((prev) => Math.max(prev - 1, 1));
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-  const handleSubmit = async () => {
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
+        setFormData({ ...formData, [name]: value });
 
-    try {
-      setLoading(true);
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: "" });
+        }
+    };
+    const validateStep = () => {
+        let newErrors = {};
+        let message = "";
 
-      // 👉 Replace with your backend API
-      await new Promise((res) => setTimeout(res, 2000));
+        if (step === 1) {
+            if (!formData.companyName) {
+                newErrors.companyName = true;
+                message = "Company name is required";
+            } else if (!formData.ownedBy) {
+                newErrors.ownedBy = true;
+                message = "Owner name is required";
+            } else if (!formData.address) {
+                newErrors.address = true;
+                message = "Address is required";
+            }
+        }
 
-      console.log("Form Data:", formData);
+        if (step === 3) {
+            if (!formData.phone) {
+                newErrors.phone = true;
+                message = "Phone is required";
+            } else if (!formData.email) {
+                newErrors.email = true;
+                message = "Email is required";
+            } else if (!formData.password) {
+                newErrors.password = true;
+                message = "Password is required";
+            } else if (formData.password.length < 8) {
+                newErrors.password = true;
+                message = "Password must be at least 8 characters";
+            } else if (!formData.confirmPassword) {
+                newErrors.confirmPassword = true;
+                message = "Confirm your password";
+            } else if (formData.password !== formData.confirmPassword) {
+                newErrors.confirmPassword = true;
+                message = "Password and confirm password must match";
+            }
+        }
 
-      alert("Account Created Successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+        setErrors(newErrors);
 
-  const progress = ((step - 1) / totalSteps) * 100;
+        if (message) {
+            toast.error(message);
+            return false;
+        }
 
-  return (
-    <div className={styles.container}>
-      {/* LEFT */}
-      <div className={styles.left}>
-        <div className={styles.card}>
-          <h2 className={styles.logo}>🧾 Swordnex Invoice</h2>
+        return true;
+    };
+    const next = () => {
+        if (!validateStep()) return;
+        setStep((prev) => Math.min(prev + 1, totalSteps));
+    };
 
-          {/* Progress */}
-          <div className={styles.progressTop}>
-            <span>Step {step} of {totalSteps}</span>
-            <span>{Math.round(progress)}%</span>
-          </div>
+    const prev = () => setStep((prev) => Math.max(prev - 1, 1));
 
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+    const handleSubmit = async () => {
+        if (!validateStep()) return;
 
-          {/* FORM */}
-          <div className={styles.form}>
-            {step === 1 && (
-              <>
-                <h3>Business Information</h3>
-                <input name="companyName" placeholder="Company Name" onChange={handleChange} className={styles.input} />
-                <input name="ownedBy" placeholder="Owned By" onChange={handleChange} className={styles.input} />
-                <textarea name="address" placeholder="Company Address" onChange={handleChange} className={styles.input} />
-              </>
-            )}
+        try {
+            setLoading(true);
 
-            {step === 2 && (
-              <>
-                <h3>Tax Information</h3>
-                <input name="gstin" placeholder="GSTIN" onChange={handleChange} className={styles.input} />
-                <input name="pan" placeholder="PAN" onChange={handleChange} className={styles.input} />
-              </>
-            )}
+            const payload = {
+                companyName: formData.companyName,
+                ownedBy: formData.ownedBy,
+                address: formData.address,
+                gstin: formData.gstin || null,
+                pan: formData.pan || null,
+                hsn: formData.hsn || null,
+                phone: formData.phone,
+                email: formData.email,
+                password: formData.password,
+            };
 
-            {step === 3 && (
-              <>
-                <h3>Account Setup</h3>
-                <input name="phone" placeholder="Phone" onChange={handleChange} className={styles.input} />
-                <input name="email" placeholder="Email" onChange={handleChange} className={styles.input} />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} className={styles.input} />
-                <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} className={styles.input} />
-              </>
-            )}
-          </div>
+            const res = await fetch("http://192.168.1.31:5000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
 
-          {/* ACTIONS */}
-          <div className={styles.actions}>
-            {step > 1 && (
-              <button onClick={prev} className={styles.secondaryBtn}>
-                Back
-              </button>
-            )}
+            // 🔥 SAFE RESPONSE HANDLING
+            const text = await res.text();
+            let data;
 
-            {step < totalSteps ? (
-              <button onClick={next} className={styles.primaryBtn}>
-                Next
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                className={styles.primaryBtn}
-                disabled={loading}
-              >
-                {loading ? <Loader /> : "Create Account"}
-              </button>
-            )}
-          </div>
+            try {
+                data = JSON.parse(text);
+            } catch {
+                console.error("Non-JSON response:", text);
+                throw new Error("Server error (not JSON)");
+            }
+
+            if (!res.ok) {
+                throw new Error(data.message || "Registration failed");
+            }
+
+            toast.success("Account created successfully 🎉");
+            navigate("/dashboard");
+
+            // reset form
+            setFormData({
+                companyName: "",
+                ownedBy: "",
+                address: "",
+                gstin: "",
+                pan: "",
+                hsn: "",
+                phone: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+            });
+
+            setStep(1);
+
+        } catch (err) {
+            console.error(err);
+            toast.error(err.message || "Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const progress = ((step - 1) / totalSteps) * 100;
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.left}>
+                <div className={styles.card}>
+                    <h2 className={styles.logo}>🧾 Swordnex Invoice</h2>
+
+                    {/* Progress */}
+                    <div className={styles.progressTop}>
+                        <span>Step {step} of {totalSteps}</span>
+                        <span>{Math.round(progress)}%</span>
+                    </div>
+
+                    <div className={styles.progressBar}>
+                        <div
+                            className={styles.progressFill}
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+
+                    {/* FORM */}
+                    <div className={styles.form}>
+                        {step === 1 && (
+                            <>
+                                <h3>Business Information</h3>
+
+                                {["companyName", "ownedBy"].map((field) => (
+                                    <div key={field} className={styles.inputGroup}>
+                                        <input
+                                            name={field}
+                                            placeholder={
+                                                field === "companyName"
+                                                    ? "Company Name"
+                                                    : "Owned By"
+                                            }
+                                            value={formData[field]}
+                                            onChange={handleChange}
+                                            className={`${styles.input} ${errors[field] ? styles.inputError : ""
+                                                }`}
+                                        />
+                                    </div>
+                                ))}
+
+                                <div className={styles.inputGroup}>
+                                    <textarea
+                                        name="address"
+                                        placeholder="Company Address"
+                                        value={formData.address}
+                                        onChange={handleChange}
+                                        className={`${styles.input} ${errors.address ? styles.inputError : ""
+                                            }`}
+                                    />
+                                </div>
+                            </>
+                        )}
+
+                        {step === 2 && (
+                            <>
+                                <h3>Tax Information</h3>
+                                <input
+                                    name="gstin"
+                                    placeholder="GSTIN (Optional)"
+                                    value={formData.gstin}
+                                    onChange={handleChange}
+                                    className={styles.input}
+                                />
+                                <input
+                                    name="pan"
+                                    placeholder="PAN (Optional)"
+                                    value={formData.pan}
+                                    onChange={handleChange}
+                                    className={styles.input}
+                                />
+                                <input
+                                    name="hsn"
+                                    placeholder="HSN / ASC Code (Optional)"
+                                    value={formData.hsn}
+                                    onChange={handleChange}
+                                    className={styles.input}
+                                />
+                            </>
+                        )}
+
+                        {step === 3 && (
+                            <>
+                                <h3>Account Setup</h3>
+
+                                {["phone", "email", "password", "confirmPassword"].map(
+                                    (field) => (
+                                        <div key={field} className={styles.inputGroup}>
+                                            <input
+                                                type={
+                                                    field.includes("password") ? "password" : "text"
+                                                }
+                                                name={field}
+                                                placeholder={
+                                                    field === "confirmPassword"
+                                                        ? "Confirm Password"
+                                                        : field.charAt(0).toUpperCase() + field.slice(1)
+                                                }
+                                                value={formData[field]}
+                                                onChange={handleChange}
+                                                className={`${styles.input} ${errors[field] ? styles.inputError : ""
+                                                    }`}
+                                            />
+                                        </div>
+                                    )
+                                )}
+                            </>
+                        )}
+                    </div>
+
+                    {/* ACTIONS */}
+                    <div className={styles.actions}>
+                        {step > 1 && (
+                            <button onClick={prev} className={styles.secondaryBtn}>
+                                Back
+                            </button>
+                        )}
+
+                        {step < totalSteps ? (
+                            <button onClick={next} className={styles.primaryBtn}>
+                                Next
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleSubmit}
+                                className={styles.primaryBtn}
+                                disabled={loading}
+                            >
+                                {loading ? <Loader /> : "Create Account"}
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* RIGHT */}
+            <div className={styles.right}>
+                <div className={styles.rightContent}>
+                    <TypingText
+                        text="Welcome to Swordnex Invoice"
+                        color="white"
+                        fontSize="32px"
+                    />
+                    <p>
+                        Manage GST invoices, inventory, reports and payments with a secure
+                        and scalable billing platform.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className={styles.right}>
-        <div className={styles.rightContent}>
-              <TypingText text="Welcome to Swordnex Invoice" color="white" fontSize="32px"/>
-          <p>
-            Manage GST invoices, inventory, reports and payments with a secure
-            and scalable billing platform.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default MultiStepForm;
+export default RegisterForm;

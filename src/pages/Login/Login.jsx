@@ -94,7 +94,7 @@ const Login = () => {
           </p>
 
           <h2 className={styles.tagline}>
-            Secure • Smart • Automated Billing
+            Secure • Smart • Automated Invoice
           </h2>
 
           <p className={styles.description}>

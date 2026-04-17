@@ -7,6 +7,8 @@ import Reports from "./pages/Reports/Reports";
 import InvoiceHistory from "./pages/InvoiceHistory/InvoiceHistory";
 import SubuserRecords from "./pages/SubuserRecords/SubuserRecords";
 import Profile from "./pages/Profile/Profile";
+import Login from "./pages/Login/Login";
+import OrganizationSetup from "./pages/OrganizationSetup/OrganizationSetup";
 
 export default function App() {
   return (
@@ -14,9 +16,11 @@ export default function App() {
       <Routes>
 
         {/* ✅ DEFAULT (FIXED) */}
-        <Route index element={<Navigate to="/dashboard" />} />
+        <Route index element={<Navigate to="/login" />} />
 
         {/* Pages */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/organization-setup" element={<OrganizationSetup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/generate-invoice" element={<InvoiceGenerator />} />
         <Route path="/invoice-history" element={<InvoiceHistory />} />

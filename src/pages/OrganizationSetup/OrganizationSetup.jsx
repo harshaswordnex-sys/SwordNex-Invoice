@@ -2,6 +2,7 @@ import { useState } from "react";
 import Sidebar from "../../elements/Sidebar";
 import Topbar from "../../elements/Topbar";
 import styles from "./OrganizationSetup.module.css";
+import { Link } from "react-router-dom";
 
 export default function OrganizationSetup() {
   const [collapsed, setCollapsed] = useState(false);
@@ -144,7 +145,7 @@ export default function OrganizationSetup() {
           <div className={styles.actions}>
             <button className={styles.btn}>Cancel</button>
             <button className={`${styles.btn} ${styles.primary}`}>
-              Save Organization
+              <Link to="/dashboard" >Save Organization</Link>
             </button>
           </div>
 

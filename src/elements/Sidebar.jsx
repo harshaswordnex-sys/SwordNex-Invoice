@@ -84,7 +84,7 @@ const NAV_ITEMS = [
   { label: "Invoice History", path: "/invoice-history", Icon: HistoryIcon },
   { label: "Reports", path: "/reports", Icon: ReportsIcon },
   { label: "Profile", path: "/profile", Icon: ProfileIcon },
-  { label: "Subuser Records", path: "/subuser", Icon: SubuserIcon },
+  { label: "Subuser Records", path: "/subuser-records", Icon: SubuserIcon },
 ];
 
 export default function Sidebar({ collapsed }) {
